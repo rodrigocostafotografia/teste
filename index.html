@@ -1562,17 +1562,19 @@ window.scrollQuizToPosition = function(){
   .conversion-eyebrow{font:700 10px var(--font-ui);letter-spacing:2px;text-transform:uppercase;color:var(--gold);margin-bottom:5px;}
   .conversion-title{font:400 clamp(25px,4vw,34px)/1.2 var(--font-serif);color:#fff;}
   .conversion-sub{font-size:12px;color:var(--muted);max-width:560px;}
-  .portfolio-grid{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:12px;}
+  .portfolio-grid{display:flex;gap:12px;overflow-x:auto;overflow-y:hidden;padding:2px 4px 12px;scroll-snap-type:x mandatory;scroll-padding-inline:4px;-webkit-overflow-scrolling:touch;overscroll-behavior-x:contain;touch-action:pan-x;scrollbar-width:none;}
+  .portfolio-grid::-webkit-scrollbar{display:none;}
   .portfolio-item.portfolio-image-error img{opacity:.35;}
-.portfolio-item{position:relative;aspect-ratio:4/5;border:1px solid rgba(255,255,255,.08);border-radius:18px;overflow:hidden;background:#0c0c14;cursor:pointer;box-shadow:0 12px 30px rgba(0,0,0,.28);}
-  .portfolio-item img{width:100%;height:100%;object-fit:cover;display:block;transition:transform .45s ease;}
-  .portfolio-item:hover img{transform:scale(1.035);}
-  .portfolio-caption{position:absolute;left:10px;right:10px;bottom:10px;padding:11px 12px;border:1px solid rgba(255,255,255,.08);border-radius:12px;background:rgba(7,7,12,.68);backdrop-filter:blur(12px);}
+  .portfolio-item{position:relative;flex:0 0 min(82vw,390px);aspect-ratio:4/5;border:1px solid rgba(255,255,255,.08);border-radius:18px;overflow:hidden;background:#0c0c14;cursor:pointer;box-shadow:0 10px 24px rgba(0,0,0,.24);scroll-snap-align:start;contain:layout paint;}
+  .portfolio-item img{width:100%;height:100%;object-fit:cover;display:block;}
+  .portfolio-item:active{transform:scale(.995);}
+  .portfolio-caption{position:absolute;left:10px;right:10px;bottom:10px;padding:11px 12px;border:1px solid rgba(255,255,255,.08);border-radius:12px;background:rgba(7,7,12,.76);backdrop-filter:blur(8px);-webkit-backdrop-filter:blur(8px);}
   .portfolio-caption strong{display:block;color:#fff;font-size:13px;}
   .portfolio-caption span{display:block;color:rgba(255,255,255,.63);font-size:10.5px;margin-top:2px;line-height:1.4;}
-  .portfolio-badge{position:absolute;top:10px;right:10px;padding:6px 9px;border-radius:999px;background:rgba(212,168,67,.88);color:#171105;font:700 9px var(--font-ui);letter-spacing:.4px;}
-  .conversion-testimonials{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:12px;}
-  .testimonial-card{padding:17px;border-radius:18px;border:1px solid rgba(212,168,67,.14);background:linear-gradient(135deg,rgba(212,168,67,.06),rgba(255,255,255,.02));}
+  .portfolio-badge{position:absolute;top:10px;right:10px;padding:6px 9px;border-radius:999px;background:rgba(212,168,67,.92);color:#171105;font:700 9px var(--font-ui);letter-spacing:.4px;}
+  .conversion-testimonials{display:flex;gap:12px;overflow-x:auto;overflow-y:hidden;padding:2px 4px 12px;scroll-snap-type:x mandatory;scroll-padding-inline:4px;-webkit-overflow-scrolling:touch;overscroll-behavior-x:contain;touch-action:pan-x;scrollbar-width:none;}
+  .conversion-testimonials::-webkit-scrollbar{display:none;}
+  .testimonial-card{flex:0 0 min(86vw,390px);padding:17px;border-radius:18px;border:1px solid rgba(212,168,67,.14);background:linear-gradient(135deg,rgba(212,168,67,.06),rgba(255,255,255,.02));scroll-snap-align:start;contain:layout paint;cursor:pointer;}
   .testimonial-head{display:flex;align-items:center;gap:10px;margin-bottom:10px;}
   .testimonial-avatar{width:46px;height:46px;border-radius:50%;object-fit:cover;border:1px solid rgba(212,168,67,.32);background:rgba(255,255,255,.03);}
   .testimonial-fallback{display:flex;align-items:center;justify-content:center;background:linear-gradient(135deg,rgba(212,168,67,.18),rgba(0,217,245,.08));color:var(--gold2);font:700 12px var(--font-ui);}
@@ -1594,15 +1596,19 @@ window.scrollQuizToPosition = function(){
   .secure-strip{display:flex;align-items:center;justify-content:center;gap:14px;flex-wrap:wrap;margin-top:15px;font-size:11px;color:var(--muted);}
   .secure-strip span{display:flex;align-items:center;gap:6px;}
   .secure-strip i{color:var(--green);}
-  .lightbox{position:fixed;inset:0;z-index:2000;background:rgba(0,0,0,.92);backdrop-filter:blur(18px);display:none;align-items:center;justify-content:center;padding:22px;}
+  .lightbox{position:fixed;inset:0;z-index:2000;background:rgba(0,0,0,.94);display:none;align-items:center;justify-content:center;padding:10px;}
   .lightbox.active{display:flex;}
-  .lightbox-inner{width:min(1120px,100%);position:relative;display:flex;flex-direction:column;align-items:center;gap:10px;}
-  .lightbox-image{width:100%;max-height:80vh;object-fit:contain;border-radius:16px;border:1px solid rgba(255,255,255,.08);box-shadow:0 30px 90px rgba(0,0,0,.65);}
-  .lightbox-caption{max-width:900px;text-align:center;font-size:12px;color:#dfe0ea;}
-  .lightbox-close,.lightbox-go{position:absolute;border:1px solid rgba(255,255,255,.12);background:rgba(7,7,12,.7);color:#fff;border-radius:50%;cursor:pointer;display:flex;align-items:center;justify-content:center;backdrop-filter:blur(10px);}
-  .lightbox-close{right:-6px;top:-6px;width:40px;height:40px;}
-  .lightbox-go{top:50%;transform:translateY(-50%);width:42px;height:42px;}
-  .lightbox-prev{left:10px;}.lightbox-next{right:10px;}
+  .lightbox-inner{width:100%;max-width:980px;position:relative;display:flex;flex-direction:column;gap:10px;min-height:0;}
+  .lightbox-track{width:100%;display:flex;overflow-x:auto;overflow-y:hidden;scroll-snap-type:x mandatory;scroll-behavior:smooth;-webkit-overflow-scrolling:touch;overscroll-behavior-x:contain;touch-action:pan-x;scrollbar-width:none;border-radius:16px;}
+  .lightbox-track::-webkit-scrollbar{display:none;}
+  .lightbox-slide{flex:0 0 100%;width:100%;display:flex;align-items:center;justify-content:center;scroll-snap-align:center;scroll-snap-stop:always;min-width:0;}
+  .lightbox-slide img{width:100%;height:min(76vh,760px);object-fit:contain;display:block;border-radius:16px;border:1px solid rgba(255,255,255,.08);background:#050508;}
+  .lightbox-caption{min-height:40px;max-width:900px;padding:0 44px;text-align:center;font-size:12px;color:#dfe0ea;}
+  .lightbox-count{position:absolute;left:50%;top:10px;transform:translateX(-50%);z-index:4;padding:5px 10px;border-radius:999px;background:rgba(7,7,12,.72);border:1px solid rgba(255,255,255,.1);font:700 10px var(--font-ui);color:#fff;}
+  .lightbox-close,.lightbox-go{position:absolute;border:1px solid rgba(255,255,255,.12);background:rgba(7,7,12,.78);color:#fff;border-radius:50%;cursor:pointer;display:flex;align-items:center;justify-content:center;}
+  .lightbox-close{right:8px;top:8px;width:40px;height:40px;z-index:5;}
+  .lightbox-go{top:42%;transform:translateY(-50%);width:42px;height:42px;z-index:5;}
+  .lightbox-prev{left:8px;}.lightbox-next{right:8px;}
   .exit-offer{position:fixed;inset:0;z-index:1900;background:rgba(0,0,0,.78);backdrop-filter:blur(12px);display:none;align-items:center;justify-content:center;padding:18px;}
   .exit-offer.active{display:flex;}
   .exit-box{width:min(460px,100%);background:linear-gradient(135deg,#0b0b12,#121016);border:1px solid rgba(212,168,67,.3);border-radius:24px;padding:28px;box-shadow:var(--glow-gold),0 28px 100px rgba(0,0,0,.6);position:relative;}
@@ -1616,8 +1622,8 @@ window.scrollQuizToPosition = function(){
   .exit-cta{width:100%;min-height:52px;border:0;border-radius:14px;background:linear-gradient(135deg,var(--gold),var(--gold2));color:#171105;font:800 14px var(--font-ui);cursor:pointer;}
   .fixed-bar .fixed-actions{align-items:center;}
   .fixed-btn-book{padding:10px 15px;min-height:44px;border-radius:10px;border:1px solid rgba(212,168,67,.35);background:rgba(212,168,67,.12);color:var(--gold2);font-size:13px;font-weight:700;cursor:pointer;font-family:var(--font-ui);display:flex;align-items:center;gap:6px;}
-  @media(max-width:850px){.conversion-hero{min-height:500px;border-radius:22px}.conversion-hero-content{padding:58px 28px 48px;min-height:500px}.portfolio-grid{grid-template-columns:repeat(2,minmax(0,1fr))}.conversion-testimonials{grid-template-columns:1fr 1fr}.conversion-stats{grid-template-columns:repeat(2,1fr)}.faq-grid{grid-template-columns:1fr}}
-  @media(max-width:600px){.conversion-hero{margin-top:10px}.conversion-hero-content{padding:52px 20px 38px}.hero-title{font-size:42px}.hero-subtitle{font-size:15px}.hero-trust-row{gap:7px}.hero-trust-chip{font-size:10px}.portfolio-grid,.conversion-testimonials{grid-template-columns:1fr}.conversion-section{padding:20px 0}.conversion-section-head{display:block}.conversion-sub{margin-top:5px}.stat-value{font-size:16px}.stat-card{padding:15px 10px}.scarcity-bar{align-items:flex-start;flex-direction:column}.scarcity-meta{text-align:left}.lightbox{padding:12px}.lightbox-go{position:fixed;top:auto;bottom:28px;transform:none}.lightbox-prev{left:18px}.lightbox-next{right:18px}.lightbox-close{position:fixed;right:16px;top:16px}.fixed-bar .fixed-price-label{display:none}.fixed-btn-book{padding:10px 12px}.fixed-btn-wa{padding:10px 12px}.fixed-actions{width:100%;justify-content:flex-end}.fixed-bar-inner>div:first-child{display:none}}
+  @media(max-width:850px){.conversion-hero{min-height:500px;border-radius:22px}.conversion-hero-content{padding:58px 28px 48px;min-height:500px}.conversion-stats{grid-template-columns:repeat(2,1fr)}.faq-grid{grid-template-columns:1fr}}
+  @media(max-width:600px){.conversion-hero{margin-top:10px}.conversion-hero-content{padding:52px 20px 38px}.hero-title{font-size:42px}.hero-subtitle{font-size:15px}.hero-trust-row{gap:7px}.hero-trust-chip{font-size:10px}.portfolio-grid{margin-right:-12px;padding-right:16px}.conversion-testimonials{margin-right:-12px;padding-right:16px}.conversion-section{padding:20px 0}.conversion-section-head{display:block}.conversion-sub{margin-top:5px}.stat-value{font-size:16px}.stat-card{padding:15px 10px}.scarcity-bar{align-items:flex-start;flex-direction:column}.scarcity-meta{text-align:left}.lightbox{padding:8px}.lightbox-go{position:fixed;top:auto;bottom:18px;transform:none}.lightbox-prev{left:18px}.lightbox-next{right:18px}.lightbox-close{position:fixed;right:16px;top:16px}.lightbox-caption{padding:0 54px;min-height:34px}.fixed-bar .fixed-price-label{display:none}.fixed-btn-book{padding:10px 12px}.fixed-btn-wa{padding:10px 12px}.fixed-actions{width:100%;justify-content:flex-end}.fixed-bar-inner>div:first-child{display:none}}
 </style>
 
 </head>
@@ -1952,10 +1958,22 @@ window.scrollQuizToPosition = function(){
 <div class="lightbox" id="portfolioLightbox" onclick="portfolioLightboxClick(event)">
   <div class="lightbox-inner">
     <button class="lightbox-close" type="button" onclick="closePortfolioLightbox()" aria-label="Fechar"><i class="fas fa-xmark"></i></button>
+    <div class="lightbox-count" id="portfolioLightboxCount">1 / 1</div>
     <button class="lightbox-go lightbox-prev" type="button" onclick="portfolioLightboxPrev(event)" aria-label="Anterior"><i class="fas fa-chevron-left"></i></button>
-    <img class="lightbox-image" id="portfolioLightboxImage" src="" alt="">
+    <div class="lightbox-track" id="portfolioLightboxTrack"></div>
     <div class="lightbox-caption" id="portfolioLightboxCaption"></div>
     <button class="lightbox-go lightbox-next" type="button" onclick="portfolioLightboxNext(event)" aria-label="Próxima"><i class="fas fa-chevron-right"></i></button>
+  </div>
+</div>
+
+<div class="lightbox" id="socialLightbox" onclick="socialLightboxClick(event)">
+  <div class="lightbox-inner">
+    <button class="lightbox-close" type="button" onclick="closeSocialLightbox()" aria-label="Fechar"><i class="fas fa-xmark"></i></button>
+    <div class="lightbox-count" id="socialLightboxCount">1 / 1</div>
+    <button class="lightbox-go lightbox-prev" type="button" onclick="socialLightboxPrev(event)" aria-label="Anterior"><i class="fas fa-chevron-left"></i></button>
+    <div class="lightbox-track" id="socialLightboxTrack"></div>
+    <div class="lightbox-caption" id="socialLightboxCaption"></div>
+    <button class="lightbox-go lightbox-next" type="button" onclick="socialLightboxNext(event)" aria-label="Próxima"><i class="fas fa-chevron-right"></i></button>
   </div>
 </div>
 
@@ -5602,28 +5620,87 @@ function baixarPDF() {
   }
   function updatePromoImage(){ var r=window.siteImages['promocao_banner']; if(!r)return; var src=imgUrl(r); if(!src)return; var hero=ge('conversionHero'); if(hero){hero.dataset.promoImage=src;} }
 
+  var socialItems = [];
+  var socialIndex = 0;
+
+  function renderPortfolioLightboxTrack(){
+    var track=ge('portfolioLightboxTrack'); if(!track)return;
+    track.innerHTML=portfolio.slice(0,12).map(function(r,i){
+      var src=imgUrl(r), title=val(r,['titulo','nome'])||'Ensaio Rodrigo Costa', alt=val(r,['descricao_alt','alt'])||title, href=String(r.link_redirect||'').trim();
+      return '<div class="lightbox-slide" data-index="'+i+'"><img src="'+esc(src)+'" alt="'+esc(alt)+'" loading="'+(i===lbIndex?'eager':'lazy')+'" decoding="async" data-href="'+esc(href)+'" onerror="this.style.opacity=.35;"></div>';
+    }).join('');
+  }
+  function updatePortfolioLightboxMeta(){
+    var r=portfolio[lbIndex]; if(!r)return;
+    var title=val(r,['titulo','nome'])||'Ensaio', alt=val(r,['descricao_alt','alt'])||title, href=String(r.link_redirect||'').trim();
+    ge('portfolioLightboxCaption').innerHTML='<strong style="display:block;color:#fff;margin-bottom:3px;">'+esc(title)+'</strong>'+esc(alt)+(href?' <span style="color:var(--gold2)">· Ver pacote</span>':'');
+    ge('portfolioLightboxCount').textContent=(lbIndex+1)+' / '+Math.min(portfolio.length,12);
+  }
+  function portfolioScrollToIndex(i,behavior){
+    var track=ge('portfolioLightboxTrack'); if(!track)return;
+    var slide=track.children[i]; if(slide) slide.scrollIntoView({behavior:behavior||'smooth',block:'nearest',inline:'center'});
+  }
   window.openPortfolioLightbox=function(i){
-    lbIndex=i||0; var r=portfolio[lbIndex]; if(!r)return;
-    var src=imgUrl(r), title=val(r,['titulo','nome'])||'Ensaio', alt=val(r,['descricao_alt','alt'])||title, href=String(r.link_redirect||'').trim();
-    ge('portfolioLightboxImage').src=src; ge('portfolioLightboxImage').alt=alt; ge('portfolioLightboxCaption').innerHTML='<strong style="display:block;color:#fff;margin-bottom:3px;">'+esc(title)+'</strong>'+esc(alt)+(href?' <span style="color:var(--gold2)">· clique na imagem para abrir o pacote</span>':''); ge('portfolioLightbox').classList.add('active'); document.body.style.overflow='hidden';
-    ge('portfolioLightboxImage').dataset.href=href;
+    if(!portfolio.length)return;
+    lbIndex=Math.max(0,Math.min(Number(i)||0,Math.min(portfolio.length,12)-1));
+    renderPortfolioLightboxTrack();
+    updatePortfolioLightboxMeta();
+    ge('portfolioLightbox').classList.add('active');
+    document.body.style.overflow='hidden';
+    requestAnimationFrame(function(){portfolioScrollToIndex(lbIndex,'auto');});
   };
   window.closePortfolioLightbox=function(){ge('portfolioLightbox').classList.remove('active');document.body.style.overflow='';};
-  window.portfolioLightboxPrev=function(e){if(e)e.stopPropagation();if(!portfolio.length)return;lbIndex=(lbIndex-1+portfolio.length)%portfolio.length;openPortfolioLightbox(lbIndex);};
-  window.portfolioLightboxNext=function(e){if(e)e.stopPropagation();if(!portfolio.length)return;lbIndex=(lbIndex+1)%portfolio.length;openPortfolioLightbox(lbIndex);};
+  window.portfolioLightboxPrev=function(e){if(e)e.stopPropagation();if(!portfolio.length)return;lbIndex=Math.max(0,lbIndex-1);updatePortfolioLightboxMeta();portfolioScrollToIndex(lbIndex);};
+  window.portfolioLightboxNext=function(e){if(e)e.stopPropagation();if(!portfolio.length)return;lbIndex=Math.min(Math.min(portfolio.length,12)-1,lbIndex+1);updatePortfolioLightboxMeta();portfolioScrollToIndex(lbIndex);};
   window.portfolioLightboxClick=function(e){if(e.target===ge('portfolioLightbox'))closePortfolioLightbox();};
-  ge('portfolioLightboxImage')?.addEventListener('click',function(e){e.stopPropagation();var href=this.dataset.href;if(href)window.open(href,'_self');});
+
+  function buildSocialModalTrack(){
+    var track=ge('socialLightboxTrack'); if(!track)return;
+    track.innerHTML=socialItems.map(function(x,i){
+      var foto=x.foto||''; var initials=x.initials||'';
+      return '<div class="lightbox-slide" data-index="'+i+'"><article class="testimonial-card" style="width:min(86vw,520px);max-height:76vh;overflow:auto;cursor:default;">'+
+        '<div class="testimonial-head">'+(foto?'<img class="testimonial-avatar" src="'+esc(foto)+'" alt="'+esc(x.nome)+'" loading="lazy">':'<div class="testimonial-avatar testimonial-fallback">'+esc(initials)+'</div>')+
+        '<div><div class="testimonial-name">'+esc(x.nome)+'</div><div class="testimonial-meta">Cliente Rodrigo Costa</div></div><div class="testimonial-stars">★★★★★</div></div>'+
+        '<div class="testimonial-text">'+esc(x.texto)+'</div>'+(x.sess?'<div class="testimonial-media"><img src="'+esc(x.sess)+'" alt="Sessão de '+esc(x.nome)+'" loading="lazy" decoding="async"></div>':'')+
+        '</article></div>';
+    }).join('');
+  }
+  function updateSocialLightboxMeta(){
+    var x=socialItems[socialIndex]; if(!x)return;
+    ge('socialLightboxCaption').innerHTML='<strong style="display:block;color:#fff;margin-bottom:3px;">'+esc(x.nome)+'</strong>Cliente Rodrigo Costa';
+    ge('socialLightboxCount').textContent=(socialIndex+1)+' / '+socialItems.length;
+  }
+  function socialScrollToIndex(i,behavior){
+    var track=ge('socialLightboxTrack'); if(!track)return;
+    var slide=track.children[i]; if(slide) slide.scrollIntoView({behavior:behavior||'smooth',block:'nearest',inline:'center'});
+  }
+  window.openSocialLightbox=function(i){
+    if(!socialItems.length)return;
+    socialIndex=Math.max(0,Math.min(Number(i)||0,socialItems.length-1));
+    buildSocialModalTrack(); updateSocialLightboxMeta();
+    ge('socialLightbox').classList.add('active'); document.body.style.overflow='hidden';
+    requestAnimationFrame(function(){socialScrollToIndex(socialIndex,'auto');});
+  };
+  window.closeSocialLightbox=function(){ge('socialLightbox').classList.remove('active');document.body.style.overflow='';};
+  window.socialLightboxPrev=function(e){if(e)e.stopPropagation();if(!socialItems.length)return;socialIndex=Math.max(0,socialIndex-1);updateSocialLightboxMeta();socialScrollToIndex(socialIndex);};
+  window.socialLightboxNext=function(e){if(e)e.stopPropagation();if(!socialItems.length)return;socialIndex=Math.min(socialItems.length-1,socialIndex+1);updateSocialLightboxMeta();socialScrollToIndex(socialIndex);};
+  window.socialLightboxClick=function(e){if(e.target===ge('socialLightbox'))closeSocialLightbox();};
+
+  var portfolioTrackEl=ge('portfolioLightboxTrack');
+  if(portfolioTrackEl){var pScrollTimer=0; portfolioTrackEl.addEventListener('scroll',function(){clearTimeout(pScrollTimer);pScrollTimer=setTimeout(function(){var width=portfolioTrackEl.clientWidth||1;lbIndex=Math.max(0,Math.min(Math.min(portfolio.length,12)-1,Math.round(portfolioTrackEl.scrollLeft/width)));updatePortfolioLightboxMeta();},80);},{passive:true});}
+  var socialTrackEl=ge('socialLightboxTrack');
+  if(socialTrackEl){var sScrollTimer=0; socialTrackEl.addEventListener('scroll',function(){clearTimeout(sScrollTimer);sScrollTimer=setTimeout(function(){var width=socialTrackEl.clientWidth||1;socialIndex=Math.max(0,Math.min(socialItems.length-1,Math.round(socialTrackEl.scrollLeft/width)));updateSocialLightboxMeta();},80);},{passive:true});}
 
   async function loadTestimonials(){
     var db=window._db;if(!db)return;
     try{
       var r=await db.from('clientes').select('*').not('depoimentos','is',null).order('id',{ascending:false}).limit(6);
       if(r.error)throw r.error;
-      var arr=(r.data||[]).filter(function(x){return String(x.depoimentos||'').trim();});
-      if(!arr.length)return;
+      var arr=(r.data||[]).filter(function(x){return String(x.depoimentos||'').trim();}); if(!arr.length)return;
       var sessionImgs=siteImages.filter(function(x){return /^depoimento_[1-6]$/i.test(String(x.slot_key||'')) && imgUrl(x);}).sort(function(a,b){return String(a.slot_key).localeCompare(String(b.slot_key),undefined,{numeric:true});});
-      var cards=arr.map(function(x,i){var nome=x.nome||'Cliente';var sess=sessionImgs[i]?imgUrl(sessionImgs[i]):'';var foto=String(x.foto_perfil||'').trim()||sess;var video=val(x,['video_url','youtube_url','video_depoimento','youtube']);var yt=extractYoutube(video);var initials=nome.trim().split(/\s+/).slice(0,2).map(function(v){return v.charAt(0)}).join('').toUpperCase();return '<article class="testimonial-card"><div class="testimonial-head">'+(foto?'<img class="testimonial-avatar" src="'+esc(foto)+'" alt="'+esc(nome)+'" loading="lazy" onerror="this.style.display=\'none\'">':'<div class="testimonial-avatar testimonial-fallback">'+esc(initials)+'</div>')+'<div><div class="testimonial-name">'+esc(nome)+'</div><div class="testimonial-meta">Cliente Rodrigo Costa</div></div><div class="testimonial-stars">★★★★★</div></div><div class="testimonial-text">'+esc(x.depoimentos)+'</div>'+(sess?'<div class="testimonial-media"><img src="'+esc(sess)+'" alt="Sessão de '+esc(nome)+'" loading="lazy"></div>':'')+(yt?'<div class="testimonial-video"><iframe src="https://www.youtube.com/embed/'+yt+'?rel=0&modestbranding=1" loading="lazy" title="Depoimento de '+esc(nome)+'" allowfullscreen></iframe></div>':'')+'</article>';});
-      ge('conversionTestimonials').innerHTML=cards.join(''); ge('conversionTestimonialsSection').style.display='block';
+      socialItems=arr.map(function(x,i){var nome=x.nome||'Cliente';var sess=sessionImgs[i]?imgUrl(sessionImgs[i]):'';var foto=String(x.foto_perfil||'').trim()||'';var initials=nome.trim().split(/\s+/).slice(0,2).map(function(v){return v.charAt(0)}).join('').toUpperCase();return {nome:nome,texto:String(x.depoimentos||''),foto:foto,sess:sess,initials:initials};});
+      var cards=socialItems.map(function(x,i){return '<article class="testimonial-card" onclick="openSocialLightbox('+i+')"><div class="testimonial-head">'+(x.foto?'<img class="testimonial-avatar" src="'+esc(x.foto)+'" alt="'+esc(x.nome)+'" loading="lazy" decoding="async">':'<div class="testimonial-avatar testimonial-fallback">'+esc(x.initials)+'</div>')+'<div><div class="testimonial-name">'+esc(x.nome)+'</div><div class="testimonial-meta">Cliente Rodrigo Costa</div></div><div class="testimonial-stars">★★★★★</div></div><div class="testimonial-text">'+esc(x.texto)+'</div>'+(x.sess?'<div class="testimonial-media"><img src="'+esc(x.sess)+'" alt="Sessão de '+esc(x.nome)+'" loading="lazy" decoding="async"></div>':'')+'<div style="margin-top:10px;font-size:10px;color:var(--gold);font-family:var(--font-ui);font-weight:600;letter-spacing:.4px;">Toque para ampliar e deslizar</div></article>';});
+      ge('conversionTestimonials').innerHTML=cards.join('');ge('conversionTestimonialsSection').style.display='block';
     }catch(e){console.warn('[Conversion] depoimentos',e);}
   }
 
