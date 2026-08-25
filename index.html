@@ -1507,7 +1507,27 @@ body::after{
   .portal-access-btn span{display:none;}
   .portal-access-btn{padding:11px 13px;}
 }
+
+/* Oculta o acesso ao portal e o carrossel intermediário de depoimentos.
+   Mantém somente a seção final de prova social (#conversionTestimonialsSection). */
+#portal-access-hidden,
+.portal-access-bar,
+#depoSection {
+  display: none !important;
+}
 </style>
+<script>
+window.scrollQuizToPosition = function(){
+  var q = document.getElementById('quizSection');
+  if(!q) return;
+  var header = document.querySelector('.header');
+  var offset = header ? header.offsetHeight + 12 : 12;
+  var rect = q.getBoundingClientRect();
+  var y = rect.top + window.pageYOffset - offset;
+  window.scrollTo({top:Math.max(0,y),behavior:'smooth'});
+};
+</script>
+
 
 <style id="conversion-restructure-css">
   .conversion-hero{position:relative;width:100%;max-width:1180px;min-height:520px;margin:18px auto 0;border:1px solid rgba(212,168,67,.22);border-radius:28px;overflow:hidden;background:linear-gradient(125deg,#0b0b12,#151111);box-shadow:0 28px 90px rgba(0,0,0,.55),var(--glow-gold);}
@@ -1543,7 +1563,8 @@ body::after{
   .conversion-title{font:400 clamp(25px,4vw,34px)/1.2 var(--font-serif);color:#fff;}
   .conversion-sub{font-size:12px;color:var(--muted);max-width:560px;}
   .portfolio-grid{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:12px;}
-  .portfolio-item{position:relative;aspect-ratio:4/5;border:1px solid rgba(255,255,255,.08);border-radius:18px;overflow:hidden;background:#0c0c14;cursor:pointer;box-shadow:0 12px 30px rgba(0,0,0,.28);}
+  .portfolio-item.portfolio-image-error img{opacity:.35;}
+.portfolio-item{position:relative;aspect-ratio:4/5;border:1px solid rgba(255,255,255,.08);border-radius:18px;overflow:hidden;background:#0c0c14;cursor:pointer;box-shadow:0 12px 30px rgba(0,0,0,.28);}
   .portfolio-item img{width:100%;height:100%;object-fit:cover;display:block;transition:transform .45s ease;}
   .portfolio-item:hover img{transform:scale(1.035);}
   .portfolio-caption{position:absolute;left:10px;right:10px;bottom:10px;padding:11px 12px;border:1px solid rgba(255,255,255,.08);border-radius:12px;background:rgba(7,7,12,.68);backdrop-filter:blur(12px);}
@@ -1599,15 +1620,6 @@ body::after{
   @media(max-width:600px){.conversion-hero{margin-top:10px}.conversion-hero-content{padding:52px 20px 38px}.hero-title{font-size:42px}.hero-subtitle{font-size:15px}.hero-trust-row{gap:7px}.hero-trust-chip{font-size:10px}.portfolio-grid,.conversion-testimonials{grid-template-columns:1fr}.conversion-section{padding:20px 0}.conversion-section-head{display:block}.conversion-sub{margin-top:5px}.stat-value{font-size:16px}.stat-card{padding:15px 10px}.scarcity-bar{align-items:flex-start;flex-direction:column}.scarcity-meta{text-align:left}.lightbox{padding:12px}.lightbox-go{position:fixed;top:auto;bottom:28px;transform:none}.lightbox-prev{left:18px}.lightbox-next{right:18px}.lightbox-close{position:fixed;right:16px;top:16px}.fixed-bar .fixed-price-label{display:none}.fixed-btn-book{padding:10px 12px}.fixed-btn-wa{padding:10px 12px}.fixed-actions{width:100%;justify-content:flex-end}.fixed-bar-inner>div:first-child{display:none}}
 </style>
 
-
-<style id="custom-hidden-cards">
-/* Ajustes solicitados: ocultar card do Portal e carrossel de depoimentos. */
-.portal-access-bar,
-.depo-strip#depoSection {
-  display: none !important;
-}
-</style>
-
 </head>
 <body>
 
@@ -1652,7 +1664,7 @@ body::after{
 </div>
 
 
-<a class="portal-access-bar" href="https://legacysistema.github.io/legacy-user/" target="_blank" rel="noopener" style="text-decoration:none;">
+<a id="portal-access-hidden" class="portal-access-bar" href="https://legacysistema.github.io/legacy-user/" target="_blank" rel="noopener" style="text-decoration:none;">
   <div class="portal-access-icon"><i class="fas fa-crown"></i></div>
   <div class="portal-access-text">
     <div class="portal-access-eyebrow">Área do Cliente</div>
@@ -1920,7 +1932,7 @@ body::after{
     <div class="portfolio-grid" id="portfolioGrid"></div>
   </section>
 
-  <section class="conversion-section" id="conversionTestimonialsSection" style="display:none;">
+  <section class="conversion-section" id="conversionTestimonialsSection">
     <div class="conversion-section-head"><div><div class="conversion-eyebrow">Prova social</div><h2 class="conversion-title">Quem já viveu essa experiência recomenda</h2></div><div class="conversion-sub">Depoimentos, retratos de clientes e registros reais das sessões.</div></div>
     <div class="conversion-testimonials" id="conversionTestimonials"></div>
   </section>
@@ -2247,6 +2259,7 @@ var _su = atob('aHR0cHM6Ly9sZWRwcWN5bnZxYmRiY2NlYmhiby5zdXBhYmFzZS5jbw==');
 var _sk = atob('ZXlKaGJHY2lPaUpJVXpJMU5pSXNJblI1Y0NJNklrcFhWQ0o5LmV5SnBjM01pT2lKemRYQmhZbUZ6WlNJc0luSmxaaUk2SW14bFpIQnhZM2x1ZG5GaVpHSmpZMlZpYUdKdklpd2ljbTlzWlNJNkltRnViMjRpTENKcFlYUWlPakUzTnpBek9EYzNNamdzSW1WNGNDSTZNakE0TlRrMk16Y3lPSDAuczhHT3pwNHdvdWpHdURjNHZLOVFYSWYzY1dMTUVOVW5KZkU0bHRfWWhMZw==');
 var _db = window.supabase.createClient(_su, _sk);
 window._db = _db; /* expõe para o módulo de promoções */
+window.SUPABASE_URL = _su;
 
 
 var A = {};
@@ -2870,7 +2883,7 @@ window.goStep = function(n, fromPopState){
   ge('pFill').style.width = pct+'%';
   ge('pMeta').textContent = 'Passo '+(n > total ? total : n)+' de '+total;
   ge('pPct').textContent = pct+'%';
-  window.scrollTo({top:0,behavior:'smooth'});
+  window.scrollQuizToPosition();
   if(!fromPopState){
     history.pushState({quizStep: n}, '', '');
   }
@@ -2890,7 +2903,7 @@ window.addEventListener('popstate', function(e){
   if(s4 && s4.classList.contains('active')){
     document.querySelectorAll('.step').forEach(function(s){ s.classList.remove('active'); });
     ge('s3').classList.add('active');
-    window.scrollTo({top:0,behavior:'smooth'});
+    window.scrollQuizToPosition();
     return;
   }
 
@@ -2907,7 +2920,7 @@ var _selectedPackageIdx = null;
 window.showResult = function(){
   ge('resultLoading').style.display = 'block';
   ge('resultContent').style.display = 'none';
-  window.scrollTo({top:0,behavior:'smooth'});
+  window.scrollQuizToPosition();
   history.pushState({quizStep: 4}, '', '');
 
   var key    = resolveKey();
@@ -3019,7 +3032,7 @@ function buildPackageStep(scored){
   ge('pFill').style.width = '85%';
   ge('pMeta').textContent = 'Escolha o pacote';
   ge('pPct').textContent = '85%';
-  window.scrollTo({top:0,behavior:'smooth'});
+  window.scrollQuizToPosition();
 
   _selectedPackageIdx = null;
   ge('btn4').classList.remove('ok');
@@ -3073,7 +3086,7 @@ window.confirmPackageSelection = function(){
   ge('pPct').textContent = '100%';
   ge('resultLoading').style.display = 'block';
   ge('resultContent').style.display = 'none';
-  window.scrollTo({top:0,behavior:'smooth'});
+  window.scrollQuizToPosition();
   renderResult(reordered);
 };
 
@@ -3207,7 +3220,8 @@ function renderResult(scored){
   ge('resultContent').style.display='block';
 
   
-  setTimeout(function(){ if(_matched) openProductModal(_matched); }, 700);
+  /* Não abre o modal automaticamente: evita travamentos ao renderizar o pacote. O usuário pode abrir pelos CTAs existentes. */
+  /* setTimeout(function(){ if(_matched) openProductModal(_matched); }, 700); */
 }
 
 
@@ -4396,7 +4410,7 @@ window.restart = function(){
   ge('pMeta').textContent='Passo 1 de 3';
   ge('pPct').textContent='0%';
   buildStep2(); buildStep3();
-  window.scrollTo({top:0,behavior:'smooth'});
+  window.scrollQuizToPosition();
 };
 
 
@@ -5475,7 +5489,73 @@ function baixarPDF() {
   function esc(s){return String(s==null?'':s).replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;').replace(/"/g,'&quot;').replace(/'/g,'&#39;');}
   function ge(id){return document.getElementById(id);}
   function val(r, keys){ for(var i=0;i<keys.length;i++){ if(r && r[keys[i]] != null && String(r[keys[i]]).trim() !== '') return r[keys[i]]; } return ''; }
-  function imgUrl(r){ return val(r,['caminho_imagem','url','imagem_url','src','public_url']); }
+
+  /* ===================================================================
+     IMAGENS DO SITE — Supabase Storage
+     Bucket: marketplace-fotos
+     Pasta:  landpage
+
+     A tabela imagens_site pode guardar em caminho_imagem tanto uma URL
+     absoluta quanto apenas o caminho relativo do arquivo. Esta função
+     normaliza os dois formatos para uma URL utilizável pelo navegador.
+     =================================================================== */
+  var SITE_IMAGES_BUCKET = 'marketplace-fotos';
+  var SITE_IMAGES_FOLDER = 'landpage';
+
+  function imgUrl(r){
+    var raw = val(r,['caminho_imagem','url','imagem_url','src','public_url']);
+    if(!raw) return '';
+    raw = String(raw).trim().replace(/\\/g,'/');
+    if(!raw) return '';
+
+    /* Já é uma URL utilizável. */
+    if(/^(?:https?:|data:|blob:)/i.test(raw)) return raw;
+
+    var base = '';
+    try {
+      base = String(window._db && window._db.supabaseUrl || '');
+    } catch(e) {}
+
+    /* O cliente v2 normalmente não expõe supabaseUrl publicamente; usa a URL
+       conhecida do próprio cliente quando necessário. */
+    if(!base && typeof window !== 'undefined' && window.SUPABASE_URL) base = String(window.SUPABASE_URL);
+    if(!base) base = 'https://ledpqcynvqbdbccebhbo.supabase.co';
+    base = base.replace(/\/+$/,'');
+
+    var path = raw.replace(/^\/+/, '');
+    var bucketPrefix = SITE_IMAGES_BUCKET.toLowerCase() + '/';
+    if(path.toLowerCase().indexOf(bucketPrefix) === 0) path = path.slice(bucketPrefix.length);
+    if(path.toLowerCase().indexOf(SITE_IMAGES_FOLDER.toLowerCase() + '/') !== 0){
+      path = SITE_IMAGES_FOLDER + '/' + path;
+    }
+
+    return base + '/storage/v1/object/public/' + SITE_IMAGES_BUCKET + '/' +
+      path.split('/').map(function(part){ return encodeURIComponent(part); }).join('/');
+  }
+
+  function isPortfolioSlot(row){
+    var slot = String(row && row.slot_key || '').trim().toLowerCase();
+
+    /* Slots técnicos que nunca devem aparecer em 'Trabalhos Recentes'. */
+    var reserved = /^(hero_background|hero_overlay|promocao_banner|promocao|selo_confianca_[0-9]+|depoimento_[0-9]+)$/i;
+    if(reserved.test(slot)) return false;
+
+    /* Mantém compatibilidade com a convenção portfolio/trabalho. */
+    if(/^(portfolio|portifolio|trabalho|trabalhos|trabalho_recente|trabalhos_recentes|recente)[_-]/i.test(slot)) return true;
+
+    /*
+       No banco atual, a imagem está cadastrada como "t1" e o arquivo está
+       dentro de marketplace-fotos/landpage. Nesse caso o slot não começa
+       com "portfolio_", então a regra anterior eliminava o registro.
+       Para a seção de Trabalhos Recentes, qualquer registro com imagem
+       válida da pasta landpage passa a ser considerado portfólio, exceto
+       os slots técnicos reservados acima.
+    */
+    var raw = val(row,['caminho_imagem','url','imagem_url','src','public_url']);
+    if(!raw) return false;
+    raw = String(raw).trim().replace(/\\/g,'/');
+    return /(?:^|\/)landpage(?:\/|$)/i.test(raw) || /^(?:t|foto|img|imagem)[_-]?[0-9]+$/i.test(slot);
+  }
   function getMonthLabel(){ return new Intl.DateTimeFormat('pt-BR',{month:'long'}).format(new Date()).replace(/^./,function(m){return m.toUpperCase();}); }
   function extractYoutube(url){ var m=String(url||'').match(/(?:youtu\.be\/|youtube\.com\/(?:watch\?(?:.*&)?v=|embed\/|shorts\/))([A-Za-z0-9_-]{11})/); return m?m[1]:''; }
   function setHeroPreload(src){ if(!src)return; try{ var pre=document.createElement('link'); pre.rel='preload'; pre.as='image'; pre.href=src; document.head.appendChild(pre); var host=new URL(src,location.href).origin; if(host && !document.querySelector('link[data-hero-preconnect="1"]')){var pc=document.createElement('link');pc.rel='preconnect';pc.href=host;pc.setAttribute('data-hero-preconnect','1');document.head.appendChild(pc);} }catch(e){} }
@@ -5495,7 +5575,8 @@ function baixarPDF() {
       if(heroSrc){ ge('heroBg').style.backgroundImage='url("'+heroSrc.replace(/"/g,'\\"')+'")'; setHeroPreload(heroSrc); }
       if(overlay){ var ov=imgUrl(overlay); if(ov) ge('heroOverlay').style.backgroundImage='url("'+ov.replace(/"/g,'\\"')+'")'; }
 
-      portfolio=siteImages.filter(function(x){return /^portfolio_/i.test(String(x.slot_key||'')) && imgUrl(x);}).sort(function(a,b){return String(a.slot_key).localeCompare(String(b.slot_key),undefined,{numeric:true});});
+      portfolio=siteImages.filter(function(x){return isPortfolioSlot(x) && imgUrl(x);}).sort(function(a,b){return String(a.slot_key).localeCompare(String(b.slot_key),undefined,{numeric:true});});
+      console.info('[Conversion] imagens_site carregadas:', siteImages.length, 'portfólio:', portfolio.length, portfolio.map(function(x){return {slot_key:x.slot_key,caminho_imagem:x.caminho_imagem,url:imgUrl(x)};}));
       renderPortfolio();
       renderTrustBadges();
       updatePromoImage();
@@ -5508,7 +5589,7 @@ function baixarPDF() {
     grid.innerHTML=portfolio.slice(0,12).map(function(r,i){
       var src=imgUrl(r), title=val(r,['titulo','nome'])||'Ensaio Rodrigo Costa', alt=val(r,['descricao_alt','alt'])||title, href=String(r.link_redirect||'').trim();
       return '<div class="portfolio-item" data-index="'+i+'" data-href="'+esc(href)+'" onclick="openPortfolioLightbox('+i+')">'+
-        '<img src="'+esc(src)+'" alt="'+esc(alt)+'" loading="lazy" onerror="this.closest(\'.portfolio-item\').style.display=\'none\'">'+
+        '<img src="'+esc(src)+'" alt="'+esc(alt)+'" loading="lazy" onerror="this.closest(\'.portfolio-item\').classList.add(\'portfolio-image-error\'); this.alt=\'Imagem indisponível\';">'+
         (href?'<div class="portfolio-badge"><i class="fas fa-arrow-up-right-from-square"></i> Ver pacote</div>':'')+
         '<div class="portfolio-caption"><strong>'+esc(title)+'</strong><span>'+esc(alt)+'</span></div></div>';
     }).join('');
