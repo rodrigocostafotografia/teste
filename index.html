@@ -7,7 +7,7 @@
 <meta name="description" content="Pacotes Rodrigo Costa Fotografia — compare opções e escolha a experiência certa.">
 <title>Rodrigo Costa Fotografia — Pacotes</title>
 <link rel="preconnect" href="https://fonts.googleapis.com">
-<link rel="preconnect" href="httpas://fonts.gstatic.com" crossorigin>
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600;700&family=DM+Serif+Display:ital@0;1&family=Manrope:wght@400;500;600;700;800&display=swap" rel="stylesheet">
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.6.0/css/all.min.css">
 <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
@@ -69,10 +69,12 @@
   .subrail{margin:7px 14px 10px;overflow-x:auto;flex-wrap:nowrap;scrollbar-width:none}
   .subrail::-webkit-scrollbar{display:none}
 
-  /* Pacotes em carrossel horizontal: uma categoria por vez, sem pilha vertical */
-  .package-grid{display:flex!important;gap:10px;overflow-x:auto;overflow-y:visible;padding:2px 14px 12px;scroll-snap-type:x mandatory;scroll-padding-left:14px;-webkit-overflow-scrolling:touch;scrollbar-width:none}
-  .package-grid::-webkit-scrollbar{display:none}
-  .package-card{flex:0 0 76vw;width:76vw;min-height:0;scroll-snap-align:start;border-radius:17px}
+  /* Pacotes em carrossel horizontal real: cada categoria rola dentro da própria faixa */
+  #packageSections{display:grid;min-width:0;width:100%;overflow:visible}
+  .category-section{display:block;min-width:0;width:100%;max-width:100%;overflow:visible}
+  .package-grid{display:flex!important;flex-direction:row!important;flex-wrap:nowrap!important;align-items:stretch;gap:10px;width:100%;max-width:100%;min-width:0;overflow-x:auto!important;overflow-y:hidden!important;padding:2px 14px 14px;scroll-snap-type:x mandatory;scroll-snap-stop:normal;scroll-padding-left:14px;-webkit-overflow-scrolling:touch;overscroll-behavior-x:contain;touch-action:pan-x;scrollbar-width:none}
+  .package-grid::-webkit-scrollbar{display:none;width:0;height:0}
+  .package-card{flex:0 0 78vw!important;width:78vw!important;max-width:78vw;min-width:78vw;min-height:0;scroll-snap-align:start;border-radius:17px}
   .package-card:hover{transform:none;box-shadow:none}
   .card-media{aspect-ratio:16/10}
   .card-body{padding:13px;gap:7px}
@@ -94,6 +96,13 @@
   /* Modal continua disponível apenas quando o usuário abrir a galeria; nunca abre sozinho */
   .intro-photo-modal{padding:0;align-items:flex-end}
   .intro-photo-box{width:100%;max-height:94vh;border-radius:20px 20px 0 0;padding:14px}
+}
+
+@media (max-width:620px){
+  /* Evita que o tamanho mínimo dos cards aumente o pai e mate o scroll horizontal. */
+  .section#packages,.section#packages .container,#packageSections,.category-section,.package-grid{min-width:0!important}
+  .package-grid{contain:layout paint;cursor:grab}
+  .package-grid:active{cursor:grabbing}
 }
 
 @media (min-width:621px){
